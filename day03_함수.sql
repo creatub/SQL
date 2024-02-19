@@ -270,4 +270,37 @@ SELECT TO_CHAR(HIREDATE, 'YYYY') AS YEAR, COUNT(*) FROM EMP GROUP BY TO_CHAR(HIR
 --	문제2] 사원 테이블에서 해당년도 각 월별로 입사한 사원수를 보여주세요.
 SELECT TO_CHAR(HIREDATE, 'YYYY-MM'), COUNT(*) FROM EMP GROUP BY TO_CHAR(HIREDATE, 'YYYY-MM') ORDER BY TO_CHAR(HIREDATE, 'YYYY-MM');
 --	문제3] 사원 테이블에서 업무별 최대 연봉, 최소 연봉을 출력하세요.
-SELECT JOB, MAX(SAL), MIN(SAL) FROM EMP GROUP BY JOB ORDER BY JOB;
+SELECT JOB, MAX(SAL*12+NVL(COMM,0)) "최대 연봉", MIN(SAL*12+NVL(COMM,0)) "최소 연봉" FROM EMP GROUP BY JOB ORDER BY JOB;
+
+HAVING
+
+SELECT JOB, COUNT(*) FROM MEMBER GROUP BY JOB HAVING COUNT(*)>1;
+
+--21] 고객 테이블에서 직업의 종류와 각 직업에 속한 최대 마일리지 정보를 보여주세요.
+--	      단, 직업군의 최대 마일리지가 0인 경우는 제외시킵시다. 
+SELECT JOB, MAX(MILEAGE) FROM MEMBER GROUP BY JOB HAVING MAX(MILEAGE)<>0;   
+--문제2] 상품 테이블에서 각 공급업체 코드별로 상품 판매가의 평균값 중 단위가 100단위로 떨어
+--	      지는 항목의 정보를 보여주세요.
+SELECT EP_CODE_FK, AVG(OUTPUT_PRICE) FROM PRODUCTS GROUP BY EP_CODE_FK HAVING MOD(AVG(OUTPUT_PRICE), 100)=0;
+
+
+
+CREATE TABLE if not exists java_member(id varchar2(20) primary key,
+			pw varchar2(10) not null,
+			name varchar2(30) not null,
+			tel varchar2(15),
+			indate date default sysdate);
+            
+create table naver_member(id varchar2(10) primary key);
+drop table naver_member;
+
+
+
+select * from java_member;
+
+SELECT COUNT(*) AS count FROM java_member WHERE id = 'kim';
+SELECT COUNT(*) AS count FROM java_member WHERE id = 'lojr';
+
+DELETE FROM java_member WHERE ID = '123';
+DELETE FROM java_member WHERE ID = '123';
+commit;
