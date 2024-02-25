@@ -145,6 +145,10 @@ WHERE (EP_CODE_FK, OUTPUT_PRICE) IN (
 --	근무지를 출력하세요.
 
 -- JOIN문을 사용할 경우
+select * from dept where deptno=10;
+
+select * from emp e join dept d on e.deptno = d.deptno where e.deptno=10;
+
 SELECT ENAME, JOB, DNAME, LOC
 FROM EMP E JOIN DEPT D
 ON E.DEPTNO = D.DEPTNO
