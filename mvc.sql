@@ -18,6 +18,16 @@ nocache;
 desc mvc_board;
 
 select * from mvc_board;
+
+select * from ( 
+select rownum rn, a.* from 
+ (select * from mvc_board where
+ title like '%123%' order by num desc) a) where rn between 1 and 5;
+ 
+ (select * from mvc_board where
+ title like '%123%' order by num desc);
+ 
+ SELECT count(num) FROM mvc_board WHERE title like '%123%';
 -------------------------------------------
 rownum 을 활용한 페이징 처리
 
@@ -39,3 +49,13 @@ pageNum     oneRecordPage       start   end
 end=pageNum*oneRecordPage;
 start = end-(oneRecordPage-1);
 -------------------------
+
+select * from java_member;
+
+select * from java_member order by name asc;
+
+
+자바 멤버에 가나다순으로 1~5번까지만 가져오는 쿼리
+select * from (
+select row_number() over(order by name asc) rn, java_member.* from java_member
+) where rn between 1 and 5;

@@ -46,3 +46,9 @@ exec bbs_find(:rs, 'k');
 print rs
 
 select * from java_member;
+select * from bbs order by no desc;
+
+alter sequence bbs_no_seq nocache;
+
+select * from user_sequences
+where sequence_name = 'BBS_NO_SEQ';
