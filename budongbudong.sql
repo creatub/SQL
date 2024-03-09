@@ -15,6 +15,12 @@ SELECT * FROM SERVICE_USER;
 insert into service_user(id, name, pw, tel, indate, email, addr1,addr2,addr3) values('hong', '홍길동', '123', '01069236751', sysdate,'hong@naver.com','12343','경기도 부천시','88-4번지'); 
 select * from service_user;
 SELECT * FROM SERVICE_USER WHERE id='sanghwi';
+
+create sequence property_seq
+start with 1
+increment by 1
+nocache;
+
 /* 부동산 매물 저장테이블 */
 CREATE TABLE PROPERTIES(
   PROPERTY_ID NUMBER(10) DEFAULT '1' PRIMARY KEY,
@@ -27,6 +33,19 @@ CREATE TABLE PROPERTIES(
   REG_DATE DATE DEFAULT SYSDATE NOT NULL
 );
 
+insert into properties(PROPERTY_ID, SELLER_ID, ADDR,
+  PRICE,
+  DESCRIPT,
+  PROPERTY_TYPE,
+  TOTAL_SIZE,
+  REG_DATE)
+  values(property_seq.nextval, 'hong', '경기도 화성시', '500000000', '아파트 11/24층', '전세', '32평', sysdate); 
+select * from properties;
+select * from user_sequences;
+alter sequence property_seq increment by 1;
+update properties set descript = '아파트 7/28층' where PROPERTY_ID=15;
+delete from properties where PROPERTY_ID=17;
+commit;
 -- 이미지를 저장할 테이블 생성
 CREATE TABLE PropertyImages (
     IMAGE_ID INT PRIMARY KEY,

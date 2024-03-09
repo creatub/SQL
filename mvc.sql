@@ -54,8 +54,13 @@ select * from java_member;
 
 select * from java_member order by name asc;
 
-
+delete from java_member where id='123';
+rollback;
 자바 멤버에 가나다순으로 1~5번까지만 가져오는 쿼리
 select * from (
 select row_number() over(order by name asc) rn, java_member.* from java_member
 ) where rn between 1 and 5;
+
+
+select count(name) from java_member
+where id='hongs';

@@ -1,41 +1,21 @@
-/* 고객 테이블 */
-CREATE TABLE MEMBER(
-  NUM NUMBER(11) DEFAULT '1' NOT NULL,
-  USERID VARCHAR2(15) NOT NULL,
+/* User 테이블 */
+SELECT * FROM MEMBER;
+CREATE TABLE USER(
+  USERID VARCHAR2(15) PRIMARY KEY,
   NAME VARCHAR2(15) NOT NULL,
-  PASSWD VARCHAR(8) NOT NULL,
-  AGE NUMBER(3) DEFAULT '1' NOT NULL,
+  USERPW VARCHAR2(30) NOT NULL,
+  EMAIL VARCHAR2(100) NOT NULL,
   MILEAGE NUMBER(8) DEFAULT '0' NOT NULL,
-  JOB VARCHAR(30),
   ADDR VARCHAR2(100) NOT NULL,
   REG_DATE DATE NOT NULL,
   PRIMARY KEY(NUM)
 );
-
-/* 고객 정보 저장 */
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('1','id1','홍길동','1234',25,0,'학생','부산시 동래구','2023-08-08');
-insert into member (num,userid,name,passwd,age,job,addr,reg_date) 
-            values ('2','id2','김길동','2345',30,1500,'직장인','서울시 강남구','2023-09-05');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('3','id3','공성현','3456',33,10000,'직장인','부산시','2023-09-09');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('4','id4','김영희','4321',18,3000,'학생','경상남도 마산시','2022-01-01');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('5','id5','박말자','5555',45,5000,'주부','경기도 남양주시','2023-05-05');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('6','id6','김철수','1234',55,0,'교수','제주도 북제주','2023-08-08');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('7','id7','홍길동','1234',41,6000,'학생','경주시','2022-12-25');
-insert into member (num,userid,name,passwd,age,job,addr,reg_date) 
-            values ('8','id8','김상현','1234',31,'무직','부산시 동래구','2023-04-18');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('9','id9','이지연','1234',25,0,'학생','강원도 철원','2023-02-06');
-insert into member (num,userid,name,passwd,age,mileage,job,addr,reg_date) 
-            values ('10','id10','홍길동','6712',62,10000,'주부','서울시 강북','2023-09-15');
-
-
-
+User_ID: 사용자의 고유 식별자 (Primary Key)
+Username: 사용자 이름
+Password: 사용자 비밀번호 (암호화 필요)
+Email: 사용자 이메일 주소
+Phone_Number: 사용자 전화번호
+등록일자 (Date_Registered): 사용자 계정의 등록일
 
 /* 카테고리 저장테이블 */
 CREATE TABLE CATEGORY(
