@@ -30,4 +30,4 @@ select * from memo order by no desc;
 select * from(
 select row_number() over(order by no desc) rn,
 memo.* from memo )
-where rn >1 and rn<6;
+where rn >0 and rn<6;

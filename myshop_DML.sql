@@ -32,3 +32,16 @@ values(3, 6, '여성의류');
 select * from downcategory;
 commit;
 rollback;
+
+create sequence product_seq nocache;
+
+select * from products;
+commit;
+
+
+select 
+p.*,
+(select upCg_name from upCategory where upCg_code = p.upCg_code) upCg_name,
+(select downCg_name from downCategory where downCg_code=p.downCg_code) downCg_name
+from products p
+order by pnum desc;
