@@ -45,3 +45,46 @@ p.*,
 (select downCg_name from downCategory where downCg_code=p.downCg_code) downCg_name
 from products p
 order by pnum desc;
+
+
+select c.*, p.pname, p.pimage1, price, saleprice, point
+    ,(c.pqty * p.saleprice) totalPrice
+    ,(c.pqty * p.point) totalPoint
+from cart c join products p 
+on c.pnum=p.pnum;
+-- ==> 장바구니 뷰를 생성
+create or replace view cartView
+as 
+select c.*, p.pname, p.pimage1, price, saleprice, point
+,(c.pqty * p.saleprice) totalPrice
+,(c.pqty * p.point) totalPoint
+from cart c join products p 
+on c.pnum=p.pnum;
+
+select * from cartView where userid='hong';
+
+select sum(totalPrice) totalPrice, sum(totalPoint) totalPoint
+from cartView where userid='hong';
+
+select * from member;
+
+select userid,name,mstate,pwd from member;
+
+update member set mstate=-2 where userid='kim2';
+commit;
+
+update member set mstate=9 where userid='admin';
+commit;
+
+update member set mstate=-1 where userid='asdfg';
+commit;
+
+
+--decode가 if문 같은 역할
+create or replace view memberView
+as 
+select m.*, decode(mstate,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') mstateStr
+from member m
+where mstate >-2;
+
+select name,userid,mstate,mstateStr from memberView;
